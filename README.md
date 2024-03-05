@@ -6,4 +6,5 @@ The Assignment 2 was made as an individual assignment and is based on the topics
 
 The video covers code execution and a short rundown on the code base, design challenges addressing, and more!
 
-<iframe allowfullscreen="allowfullscreen" src="https://drive.google.com/file/d/1Wk1jRw7DsVZAlayk0cEXmQbRQDvaTZDM/preview" ></iframe>
+[![Assignment 2](https://i.ytimg.com/vi/sDAP-c-c22E/maxresdefault.jpg)](https://youtu.be/sDAP-c-c22E)
+
