@@ -8,9 +8,13 @@ import pprint
 # https://docs.python.org/3/library/xml.html#xml-vulnerabilities
 
 # Server address
-SERVER_ADDRESS = "http://localhost:8000"  # Running locally
+BALANCER_ADDRESS = "http://localhost:8000"  # Running locally
 
 # Server connection
+BALANCER_PROXY = xmlrpc.client.ServerProxy(BALANCER_ADDRESS)
+SERVER_ADDRESS = (
+    BALANCER_PROXY.get_server()  # This needs the load balancer to have a working get_server method
+)
 SERVER_PROXY = xmlrpc.client.ServerProxy(SERVER_ADDRESS)
 
 # Schema for timestamps

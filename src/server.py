@@ -1,5 +1,6 @@
 # server.py, JN, 05.03.2024
 import os
+import sys
 from xmlrpc.server import SimpleXMLRPCServer
 from xmlrpc.server import SimpleXMLRPCRequestHandler
 import xml.etree.ElementTree as ET
@@ -10,10 +11,6 @@ import requests
 class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ("/RPC2",)  # The default value is ('/', '/RPC2')
 
-
-# Initiate the server
-PORT = 8000
-SERVER = SimpleXMLRPCServer(("localhost", PORT), requestHandler=RequestHandler)
 
 # XML database file path
 XML_FILE = "db.xml"
@@ -114,13 +111,32 @@ def search_wikipedia(search_term: str):
         return f"Error: {e}"
 
 
-# Register functions with the server
-SERVER.register_function(add_note)
-SERVER.register_function(get_notes)
-SERVER.register_function(search_wikipedia)
+def run():
+    # Get the port from command line arguments
+    if len(sys.argv) > 1:
+        try:
+            PORT = int(sys.argv[1])
+        except ValueError:
+            print("Invalid port number. Please provide a valid integer port number.")
+            sys.exit(1)
+    else:
+        print("Port number not provided. Please provide a valid integer port number.")
+        sys.exit(1)
 
-# Run the server's main loop
-print(f"Server is listening on PORT {PORT}...")
-SERVER.serve_forever()
+    # Initiate the server
+    server = SimpleXMLRPCServer(("localhost", PORT), requestHandler=RequestHandler)
+
+    # Register functions with the server
+    server.register_function(add_note)
+    server.register_function(get_notes)
+    server.register_function(search_wikipedia)
+
+    # Run the server's main loop
+    print(f"Server is listening on PORT {PORT}...")
+    server.serve_forever()
+
+
+if __name__ == "__main__":
+    run()
 
 # eof
