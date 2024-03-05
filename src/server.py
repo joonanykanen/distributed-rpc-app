@@ -23,6 +23,13 @@ XML_FILE = "db.xml"
 WIKI_URL = "https://en.wikipedia.org/w/api.php"
 
 
+def ping() -> str:
+    """
+    Simple function to confirm the server is reachable.
+    """
+    return "Pong"
+
+
 def add_note(topic: str, text: str, timestamp: str) -> str:
     """
     Function to add a note to the XML database
@@ -131,6 +138,7 @@ def run():
     server = SimpleXMLRPCServer(("localhost", PORT), requestHandler=RequestHandler)
 
     # Register functions with the server
+    server.register_function(ping)
     server.register_function(add_note)
     server.register_function(get_notes)
     server.register_function(search_wikipedia)
