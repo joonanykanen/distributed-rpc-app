@@ -6,6 +6,10 @@ from xmlrpc.server import SimpleXMLRPCRequestHandler
 import xml.etree.ElementTree as ET
 import requests
 
+# Warning The xmlrpc.server module is not secure against maliciously constructed data.
+# If you need to parse untrusted or unauthenticated data see XML vulnerabilities.
+# https://docs.python.org/3/library/xml.html#xml-vulnerabilities
+
 
 # Restrict to a particular path
 class RequestHandler(SimpleXMLRPCRequestHandler):
