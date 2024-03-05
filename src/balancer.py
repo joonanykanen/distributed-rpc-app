@@ -2,6 +2,10 @@
 from xmlrpc.server import SimpleXMLRPCServer
 import random
 
+# Warning The xmlrpc.server module is not secure against maliciously constructed data.
+# If you need to parse untrusted or unauthenticated data see XML vulnerabilities.
+# https://docs.python.org/3/library/xml.html#xml-vulnerabilities
+
 # List of server addresses
 SERVER_ADDRESSES = [
     "http://localhost:8001",
